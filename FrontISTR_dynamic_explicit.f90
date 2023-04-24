@@ -197,7 +197,9 @@ module fstr_dynamic_nlexplicit
   
       ! 接触解析用
       if( associated( fstrSOLID%contacts ) )  then
+        ! 接触解析用配列で割当が済んでいないものは割当
         call initialize_contact_output_vectors(fstrSOLID,hecMAT)
+        ! contactfreeのときはddunodeにゼロが返る
         call forward_increment_Lagrange(1,ndof,fstrDYN%VEC1,hecMESH,fstrSOLID,infoCTChange,&
           & fstrDYN%DISP(:,2),fstrSOLID%ddunode)
       endif
